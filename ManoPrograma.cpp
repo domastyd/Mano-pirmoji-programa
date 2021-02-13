@@ -3,39 +3,84 @@
 
 using namespace std;
 
-int main(){
-    string vardas;
-    string pirmaEilute;
-    string antraEilute;
-    string treciaEilute;
-    string ketvirtaEilute;
-    string penktaEilute;
+string Sveikinimas(string name){
+    if(name[name.length()-1] == 'a')
+    return "Sveika, ";
+    if(name[name.length()-1] == 'e'){
+        return "Sveika, ";  
+    }
+    if(name[name.length()-1] == 'a'){
+        return "Sveikas, ";
+    }
+    else return "Sveikas, ";
+}
+void Spausdinimas(string name, int remelioDydis) {
+    string pasisveikinimas = Sveikinimas(name);
+    int tekstas = pasisveikinimas.length() + name.length();
+    int stulpeliai = (remelioDydis + 1) * 2 + tekstas + 1;
+    int eilutes = 1 + remelioDydis * 2;
+    int horizontalusTarpai = remelioDydis;
+    int vertikalusTarpai = remelioDydis;
 
-    cout << "Iveskite savo varda: ";
-    cin >> vardas;
+    if(remelioDydis == 0){
+        cout << "* " + pasisveikinimas + name + "! *";
+        return;
+    }
+    for(int i =0;i<tekstas+3+horizontalusTarpai*2;i++)
+    {
+        cout << "*";
+    }
+    cout << endl;
+    for(int v = 0;v<vertikalusTarpai;v++)
+    {
+        cout << "*";
+        for(int i =0;i<tekstas+1+horizontalusTarpai*2;i++)
+        {
+            cout <<" ";
+        }
+        cout<<"*";
+        cout<<endl;
+    }
+    cout << "*";
+    for(int i =0;i<horizontalusTarpai;i++) cout << " ";
+    cout<< pasisveikinimas << name << "!";
     
-    for(int i = 0; i < vardas.length() + 14; i++){ //+14 nes iskaiciuojamas zodis Sveikas, tarpai, kablelis ir lygiuotes
-        pirmaEilute += "*";
+    for(int i =0;i<horizontalusTarpai;i++) cout << " ";
+    cout << "*";
+    cout <<endl;
+    for(int v = 0;v<vertikalusTarpai;v++)
+    {
+        cout << "*";
+        for(int i =0;i<tekstas+1+horizontalusTarpai*2;i++)
+        {
+            cout <<" ";
+        }
+        cout<<"*";
+        cout<<endl;
     }
-    antraEilute += "*";
-    for(int i = 0; i < vardas.length() + 12; i++){ //+14 nes iskaiciuojamas zodis Sveikas, tarpai, kablelis ir lygiuotes
-        antraEilute += " ";
+    for(int i =0;i<tekstas+3+horizontalusTarpai*2;i++)
+    {
+        cout << "*";
     }
-    antraEilute += "*";
-    treciaEilute = "* Sveikas, " + vardas + "! *";
-    ketvirtaEilute += "*";
-    for(int i = 0; i < vardas.length() + 12; i++){ //+14 nes iskaiciuojamas zodis Sveikas, tarpai, kablelis ir lygiuotes
-        ketvirtaEilute += " ";
+    cout <<endl;
+}
+
+int main(){
+    string name;
+    cout << "Įveskite savo vardą: ";
+    cin >> name;
+
+    const int minValue = 0;
+    const int maxValue = 100;
+    
+    int remelioDydis;
+    cout << "Iveskite remelio dydi (" << minValue << "-" << maxValue << "): ";
+    cin >> remelioDydis;
+
+    if(remelioDydis < 0 || remelioDydis > 100){
+        cout << "Klaida: rėmelio dydis " << remelioDydis << " per didelis/per mazas dydis (" << minValue << "-" << maxValue << ")" << endl;
     }
-    ketvirtaEilute += "*";
-    for(int i = 0; i < vardas.length() + 14; i++){ //+14 nes iskaiciuojamas zodis Sveikas, tarpai, kablelis ir lygiuotes
-        penktaEilute += "*";
-    }
-    cout << pirmaEilute << endl;
-    cout << antraEilute << endl;
-    cout << treciaEilute << endl;
-    cout << ketvirtaEilute << endl;
-    cout << penktaEilute << endl;
+    Spausdinimas(name, remelioDydis);
 
     return 0;
 }
